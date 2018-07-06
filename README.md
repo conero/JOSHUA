@@ -1,26 +1,51 @@
-## 项目介绍
-    Joshua(js)   开始日期 2016年10月8日 星期六
-    author:     Joshua Conero
-    说明： 
-        开发js轻量级运行库，如类jQuery的hyang库，借助当前的浏览器特性实现jQuery功能
-        同时为其他页面提供js CDN服务 ?? 此项无法开源中国无法实现
-        实现JavaScript前端点子
-## 项目介绍
- +   HyangJs     依托现代浏览器的特性实现以前的jQuery化风格编程>> 博客-你不需要jQuery(x)??
- +   scommJs     window.open，以及iframe之间页面通信(Signal communication), HTML5 通信特性
- +   communication API
-        HTML5定义的MessageEvent接口也是HTML5 WebSockets和HTML5 WebWorkers的一部分
-        
- - 参考
-    用纯JavaScript替代jQuery的技巧   http://netsmell.com/post/you-do-not-need-jquery.html
-    你不需要jQuery(X)           http://www.webhek.com/how-to-forget-about-jquery-and-start-using-native
+# (wp4-msr) Webpack 4 manager .SuRonnnng
+> Joshua Conero
+> 2018年7月6日 星期五
 
-## 其他
-+ 源(origin) 规则(scheme)、主机(host)、端口(post)组成 scheme://host:post/  
-## HTML5
-    WebSocket
-    web workers
-    communication API
 
-## 概念化
- +  webSocket 浏览器与服务器全双工通信
+
+
+
+| 说明项         | 项值                               | 其他 |
+| -------------- | ---------------------------------- | ---- |
+| webpack 版本   | webpack                            |      |
+|                | webpack-cli                        |      |
+| options 默认值 | data.target = 'web'                |      |
+|                | data.mode = 'development'          |      |
+|                | data.output.filename = '[name].js' |      |
+
+
+
+## 起始
+
+> 系统主要用于多文件编译，webpack4 处理包
+
+- npm 依赖安装
+  - npm i --save-dev webpack webpack-cli
+- package-script
+  - watch 开发模式
+    - webpack --watch --config test/webpack.base.js 
+  - prod 发布模式
+    - webpack --mode=production --config test/webpack.base.js 
+
+
+
+> 系统编译脚本
+
+```js
+const {Msr4} = require('../src/Msr4')
+
+let config = {
+    source_dir: './test/base/',
+    target_dir: '../test/dist/base'
+}
+module.exports = (new Msr4(config))
+    .js([
+        'index',
+        'child/index'
+    ])
+    .data
+```
+
+
+

@@ -1,0 +1,25 @@
+{
+  "name": "wp4-msr",
+  "version": "0.0.1",
+  "build": "20180706",
+  "description": "webpack 4 manager sr",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm install",
+    "test-base": "webpack --watch --config test/webpack.base.js",
+    "tbase-prod": "webpack --mode=production --config test/webpack.base.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/Doee/JOSHUA.git"
+  },
+  "keywords": [
+    "webpack"
+  ],
+  "author": "Joshua Conero",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8"
+  }
+}
