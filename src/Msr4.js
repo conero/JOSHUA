@@ -24,7 +24,11 @@ class Msr4 {
         // output
         let output = this.config.options.output || {}
         if(!output.filename){
-            output.filename = '[name].js'
+            if(config.hasMinScr && process.env.NODE_ENV){
+                output.filename = '[name].min.js'
+            }else{
+                output.filename = '[name].js'
+            }
         }
         this.config.options.output = output
 

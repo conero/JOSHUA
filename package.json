@@ -5,8 +5,8 @@
   "description": "webpack 4 manager sr",
   "main": "index.js",
   "scripts": {
-    "test": "npm install",
     "test-base": "webpack --watch --config test/webpack.base.js",
+    "tbase-src": "webpack --devtool=source-map --config test/webpack.base.js",
     "tbase-prod": "webpack --mode=production --config test/webpack.base.js"
   },
   "repository": {

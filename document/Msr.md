@@ -23,6 +23,7 @@ config = {
 	}
     source_dir: './'			// 源代码目录
 	target_dir: ''				// 系统输出目录
+	hasMinScr: 'false'			// 是否有min结尾的名称， 如 [name].js -> [name].min.js  根据 NODE_ENV
 }
 ```
 
