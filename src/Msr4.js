@@ -5,6 +5,7 @@
 
 const path = require('path')
 const Util = require('./Util')
+var vdata = require('./CliData')
 
 /**
  * 系统管理类
@@ -59,34 +60,6 @@ class Msr4 {
         this.config.options.entry = entry
         return this
     }
-    js2(key, value){
-        let {config} = this,
-            entry = config.options.entry
-        if(Util.isArray(key)){  // array
-            if(!entry){
-                entry = []
-            }
-            entry = entry.concat(key)
-        }
-        else if(Util.isObject(key)){    // object
-            if(!entry){
-                entry = {}
-            }
-            entry = Object.assign(entry, key)
-        }else if(key && value){         // object
-            if(!entry){
-                entry = {}
-            }
-            entry[key] = value
-        }else if(key){         // array
-            if(!entry){
-                entry = []
-            }
-            entry.push(key)
-        }  
-        this.config.options.entry = entry
-        return this
-    }
     /**
      * enter 文件检测
      * @private
@@ -129,7 +102,7 @@ class Msr4 {
         }
         // 目标地址
         if(config.target_dir){
-            data.output.path = path.resolve(__dirname, config.target_dir)
+            data.output.path = path.resolve(process.cwd(), config.target_dir)
         }
         
         return data

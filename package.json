@@ -1,7 +1,7 @@
 {
   "name": "wp4-msr",
-  "version": "0.0.1",
-  "build": "20180706",
+  "version": "0.0.2",
+  "build": "20180709",
   "description": "webpack 4 manager sr",
   "main": "index.js",
   "scripts": {
