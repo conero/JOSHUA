@@ -108,7 +108,10 @@ class Msr4 {
         if(config.target_dir){
             data.output.path = path.resolve(process.cwd(), config.target_dir)
         }
-        
+        // devtool
+        // if(!data.devtool && 'production' == process.env.NODE_ENV){
+        //     data.devtool = 'source-map'
+        // }
         return data
     }
 }
