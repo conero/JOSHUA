@@ -6,17 +6,13 @@
         同时为其他页面提供js CDN服务 ?? 此项无法开源中国无法实现
         实现JavaScript前端点子
 ## 项目介绍
- +   HyangJs     依托现代浏览器的特性实现以前的jQuery化风格编程>> 博客-你不需要jQuery(x)??
- +   scommJs     window.open，以及iframe之间页面通信(Signal communication), HTML5 通信特性
- +   communication API
-        HTML5定义的MessageEvent接口也是HTML5 WebSockets和HTML5 WebWorkers的一部分
-        
- - 参考
-    用纯JavaScript替代jQuery的技巧   http://netsmell.com/post/you-do-not-need-jquery.html
-    你不需要jQuery(X)           http://www.webhek.com/how-to-forget-about-jquery-and-start-using-native
+- 使用 *typescript* 重写库
+    - *store* web storage 引擎
+      - 基于 *bKey(区块ID)* 的 kv 数据查询器
 
 ## 其他
 + 源(origin) 规则(scheme)、主机(host)、端口(post)组成 scheme://host:post/  
+
 ## HTML5
     WebSocket
     web workers
