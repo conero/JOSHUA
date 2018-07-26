@@ -7,6 +7,8 @@
 
 ## 结构
 
+> 目录结构
+
 - src
   - browser			       浏览器版本 js
     - storage			数据存储器

@@ -10,6 +10,13 @@
     - *store* web storage 引擎
       - 基于 *bKey(区块ID)* 的 kv 数据查询器
 
+> 主要字库
+
+- Ja
+- store
+
+
+
 ## 其他
 + 源(origin) 规则(scheme)、主机(host)、端口(post)组成 scheme://host:post/  
 
