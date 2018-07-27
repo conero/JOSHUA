@@ -1,29 +1,27 @@
-## 项目介绍
-    Joshua(js)   开始日期 2016年10月8日 星期六
-    author:     Joshua Conero
-    说明： 
-        开发js轻量级运行库，如类jQuery的hyang库，借助当前的浏览器特性实现jQuery功能
-        同时为其他页面提供js CDN服务 ?? 此项无法开源中国无法实现
-        实现JavaScript前端点子
-## 项目介绍
-- 使用 *typescript* 重写库
-    - *store* web storage 引擎
-      - 基于 *bKey(区块ID)* 的 kv 数据查询器
+# SurongTs
+- 2017年11月8日 星期三
+- Joshua Conero
 
-> 主要字库
+>
+typescript 编写工具包，主要用于的浏览脚本
+来源从： aurora_center 项目中的 js 脚本
+SuRong 为纪念作者的 ex-girl
 
-- Ja
-- store
+## install
+- npm install surongts          安装包
 
+## src
+- src
+    - storage.ts            SessionStorage/localStorage 封装  +20171108
+    - location.ts           url，地址相关处理与操作方法         +20171108
+    - Susanna.ts            全局公共工具包                     +20171108
+    - index.ts              wepback 打包为统一文件处理包        +20171108
+    - Dataset.ts            内存不可变数据集合处理封装          +20171115
 
-
-## 其他
-+ 源(origin) 规则(scheme)、主机(host)、端口(post)组成 scheme://host:post/  
-
-## HTML5
-    WebSocket
-    web workers
-    communication API
-
-## 概念化
- +  webSocket 浏览器与服务器全双工通信
+## 工具
+- typescript
+    - tsc                       编译包
+- webpack    
+    - $ webpack .               打包工具
+- npm
+    - $ npm publish             发布程序包

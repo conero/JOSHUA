@@ -1,12 +1,10 @@
 {
-  "compilerOptions": {
-    "outDir": "./dist/",
-    "noImplicitAny": true,
-    "module": "es6",
-    "sourceMap": true,
-    "target": "es5"
-  },
-  "files": [
-      "./src/index.d.ts"
-  ]
+    "compilerOptions": {
+        "outDir": "./built",
+        "allowJs": true,
+        "target": "es5"
+    },
+    "include": [
+        "./src/**/*"
+    ]
 }

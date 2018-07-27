@@ -1,12 +1,5 @@
-# npm 插件包
-node_modules/
+# nodejs module
+node_modules
 
-# goland 编辑器
-.idea
-
-# 本地忽律文件，运维项目
-.ig.*
-tests/base/*.js.map
-
-# npm 安装缓存
-package-lock.json
+# 编译目录
+built/
