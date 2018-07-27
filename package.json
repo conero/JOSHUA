@@ -1,13 +1,14 @@
 {
   "name": "joshua",
-  "release": "20180726",
-  "version": "1.0.0",
+  "release": "20180727",
+  "version": "1.0.1",
   "description": "js lib by self",
   "main": "index.js",
   "scripts": {
     "watch": "webpack --mode=development --define=process.env.NODE_ENV='development' --watch --progress",
     "prod": "webpack --mode=production --define process.env.NODE_ENV='production' --progress",
-    "dev": "webpack --devtool=source-map --progress --hide-modules"
+    "dev": "webpack --devtool=source-map --progress --hide-modules",
+    "base": "webpack --devtool=source-map  --watch --progress --hide-modules --config=./tests/webpack.base.js"
   },
   "repository": {
     "type": "git",

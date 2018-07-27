@@ -1,14 +1,4 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else {
-		var a = factory();
-		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-	}
-})(window, function() {
-return /******/ (function(modules) { // webpackBootstrap
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -91,232 +81,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/Joshua.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./tests/base/url.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "./src/Joshua.ts":
-/*!***********************!*\
-  !*** ./src/Joshua.ts ***!
-  \***********************/
-/*! exports provided: Ja, store, url */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Ja", function() { return Ja; });
-/* harmony import */ var _version__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../version */ "./version.ts");
-/* harmony import */ var _browser_storage_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./browser/storage/store */ "./src/browser/storage/store.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "store", function() { return _browser_storage_store__WEBPACK_IMPORTED_MODULE_1__["default"]; });
-
-/* harmony import */ var _browser_url__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./browser/url */ "./src/browser/url.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "url", function() { return _browser_url__WEBPACK_IMPORTED_MODULE_2__["default"]; });
-
-/**
- * 2018年7月26日 星期四
- * Joshua 总类型
- */
-
-
-
-var Ja = /** @class */ (function () {
-    function Ja() {
-    }
-    Ja.version = _version__WEBPACK_IMPORTED_MODULE_0__["LibVersion"].version;
-    Ja.author = _version__WEBPACK_IMPORTED_MODULE_0__["LibVersion"].author;
-    return Ja;
-}());
-
-
-
-
-
-/***/ }),
-
-/***/ "./src/browser/storage/adapter.ts":
-/*!****************************************!*\
-  !*** ./src/browser/storage/adapter.ts ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/**
- * 2018年7月26日 星期四
- * 适配器
- */
-var Adapter = /** @class */ (function () {
-    function Adapter(engine) {
-        this.engine = engine || 'session';
-        this.engine = this.engine.toLowerCase();
-        // 获取引擎
-        switch (engine) {
-            case 'session':
-                this.storage = window.sessionStorage;
-                break;
-            case 'local':
-                this.storage = window.localStorage;
-                break;
-        }
-    }
-    /**
-     * 参数获取
-     * @param {string} key
-     * @returns {string | null}
-     */
-    Adapter.prototype.get = function (key) {
-        return this.storage.getItem(key);
-    };
-    /**
-     * 设置值
-     * @param {string} key
-     * @param {*} value
-     * @return Ja.storeAdapter
-     */
-    Adapter.prototype.set = function (key, value) {
-        if ('object' == typeof value) {
-            value = JSON.stringify(value);
-        }
-        this.storage.setItem(key, value);
-        return this;
-    };
-    /**
-     * 删除值
-     * @param {string} key
-     * @returns {Ja.storeAdapter}
-     */
-    Adapter.prototype.del = function (key) {
-        this.storage.removeItem(key);
-        return this;
-    };
-    return Adapter;
-}());
-/* harmony default export */ __webpack_exports__["default"] = (Adapter);
-
-
-/***/ }),
-
-/***/ "./src/browser/storage/store.ts":
-/*!**************************************!*\
-  !*** ./src/browser/storage/store.ts ***!
-  \**************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _adapter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./adapter */ "./src/browser/storage/adapter.ts");
-/* harmony import */ var _data_uType__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../data/uType */ "./src/data/uType.ts");
-/**
- * 2018年7月26日 星期四
- * 浏览器存储系统
- */
-///<reference path="../../index.d.ts"/>
-
-
-var store = /** @class */ (function () {
-    function store(options) {
-        this.options = options || {};
-        this.engine = this.options.engin || 'session';
-        this.adapter = new _adapter__WEBPACK_IMPORTED_MODULE_0__["default"](this.engine);
-        if (this.options.bKey) {
-            this.bKey = this.options.bKey;
-        }
-        this._init();
-    }
-    /**
-     * 项目初始化
-     */
-    store.prototype._init = function () {
-        this.data = {};
-        if (this.bKey) {
-            var sedt = this.raw(this.bKey);
-            if (sedt) {
-                try {
-                    this.data = JSON.parse(sedt);
-                }
-                catch (error) {
-                    this.data = {};
-                }
-            }
-        }
-    };
-    /**
-     * @param {string} key
-     * @returns {string|null}
-     */
-    store.prototype.raw = function (key) {
-        return this.adapter.get(key);
-    };
-    /**
-     * 设置原始值
-     * @param {string} key
-     * @param value
-     * @returns {Ja.store}
-     */
-    store.prototype.setRaw = function (key, value) {
-        this.adapter.set(key, value);
-        return this;
-    };
-    /**
-     * 删除所有数据
-     */
-    store.prototype.clearAll = function () {
-        var bKey = this.bKey;
-        if (bKey) {
-            this.adapter.del(bKey);
-            this.data = {};
-        }
-    };
-    /**
-     * 数据更新
-     * @returns {Ja.store}
-     */
-    store.prototype.update = function () {
-        var _a = this, bKey = _a.bKey, data = _a.data;
-        if (bKey) {
-            this.adapter.set(bKey, data);
-        }
-        return this;
-    };
-    /**
-     * 值设置
-     * @param {string} key
-     * @param value
-     * @returns {Ja.store}
-     */
-    store.prototype.set = function (key, value) {
-        var data = this.data;
-        this.data = _data_uType__WEBPACK_IMPORTED_MODULE_1__["default"].isObject(data) ? data : {};
-        this.data[key] = value;
-        return this;
-    };
-    /**
-     * 删除数据
-     * @param {string} key
-     * @returns {Ja.store}
-     */
-    store.prototype.del = function (key) {
-        delete this.data[key];
-        return this;
-    };
-    /**
-     * 获取配置数据
-     * @param {string} key
-     * @param def
-     * @returns {*}
-     */
-    store.prototype.get = function (key, def) {
-        return this.data[key] || def;
-    };
-    return store;
-}());
-/* harmony default export */ __webpack_exports__["default"] = (store);
-
-
-/***/ }),
 
 /***/ "./src/browser/url.ts":
 /*!****************************!*\
@@ -677,21 +445,108 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./version.ts":
-/*!********************!*\
-  !*** ./version.ts ***!
-  \********************/
-/*! exports provided: LibVersion */
+/***/ "./tests/base/url.ts":
+/*!***************************!*\
+  !*** ./tests/base/url.ts ***!
+  \***************************/
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LibVersion", function() { return LibVersion; });
-var LibVersion = { "version": "1.0.1", "release": "20180727", "author": "Joshua Conero", "name": "joshua" };
+/* harmony import */ var _src_browser_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/browser/url */ "./src/browser/url.ts");
+/* harmony import */ var _src_data_operation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../src/data/operation */ "./src/data/operation.ts");
+/**
+ * 项目测试
+ * url
+ */
+
+
+var main = document.querySelector('#main');
+// 项目测试如可
+var App = /** @class */ (function () {
+    function App() {
+        main.innerHTML = '';
+        this.topComp();
+    }
+    App.prototype.topComp = function () {
+        var uSelf = new _src_browser_url__WEBPACK_IMPORTED_MODULE_0__["default"]();
+        var div = document.createElement('div');
+        div.innerHTML = "\n            <h4>\u5F53\u524DURL\u5730\u5740\u89E3\u6790</h4>\n            <table border=\"1\">\n                <tr><th>\u540D\u79F0</th><th>\u63CF\u8FF0</th><th>\u503C</th></tr>            \n                <tr><td>url</td><td>\u5730\u5740</td><td><div>" + uSelf.url + "</div></td></tr>            \n                <tr><td>purl</td><td>\u5730\u5740</td><td><div>" + uSelf.purl + "</div></td></tr>            \n                <tr><td>hash</td><td>\u951A\u70B9</td><td><div>" + uSelf.hash + "</div></td></tr>            \n                <tr><td>search</td><td>\u67E5\u8BE2\u503C</td><td><div>" + uSelf.search + "</div></td></tr>            \n                <tr><td colspan=\"3\">querys/\u89E3\u6790\u503C</td></tr>            \n                <tr><td colspan=\"3\"><div>" + JSON.stringify(uSelf.querys) + "</div></td></tr>    \n                <tr><td><input class=\"get\"></td><td>\u67E5\u8BE2\u503C</td><td><div class=\"get\">\u8F93\u5165\u503C\u6309\u201Center\u201D\u67E5\u8BE2\uFF0C\u201Cdelete\u201D \u5220\u9664</div></td></tr>           \n                <tr><td><input class=\"del\"></td><td>\u5220\u9664\u503C</td><td><div class=\"del\">\u8F93\u5165 \u201Ck\u201D \u5220\u9664 url\uFF0C \u201C~\u201D \u7B49\u8868\u8DF3\u8F6C<</div></td></tr>           \n                <tr><td><input class=\"add\"></td><td>\u6DFB\u52A0k-v</td><td><div class=\"add\">\u8F93\u5165 \u201Ck=v\u201D \u66F4\u65B0 url\uFF0C \u201C~\u201D \u7B49\u8868\u8DF3\u8F6C</div></td></tr>           \n            </table>\n        ";
+        // 查询值
+        div.querySelector('input.get').addEventListener('keydown', function (evt) {
+            //console.log(evt);
+            // enter
+            if (evt.keyCode == 13) {
+                var value = this.value.trim();
+                var sv = uSelf.get(value);
+                div.querySelector('div.get').innerHTML = (sv ? sv + ",  " + value + "=" + sv : value + " \u53C2\u6570\u4E0D\u5B58");
+            }
+            else if (46 == evt.keyCode) { // delete
+                this.value = '';
+            }
+        });
+        // 更新值
+        div.querySelector('input.add').addEventListener('keydown', function (evt) {
+            //console.log(evt);
+            // enter
+            if (evt.keyCode == 13) {
+                var value = this.value;
+                var idx = value.indexOf('=');
+                var isGoto = false;
+                if (idx > -1) {
+                    var key = value.substr(0, idx), v = value.substr(idx).trim();
+                    if (_src_data_operation__WEBPACK_IMPORTED_MODULE_1__["default"].inArray(key.substr(0, 1), ['~']) > -1) {
+                        key = key.substr(1);
+                        isGoto = true;
+                    }
+                    var data = {};
+                    data[key] = v;
+                    uSelf.updateByData(data, !isGoto);
+                    div.querySelector('div.add').innerHTML = uSelf.newUrl;
+                }
+                else {
+                    div.querySelector('div.add').innerHTML = '输入值格式有误，使用 “k=v”类型。首字母 ~ 表示跳转.';
+                }
+            }
+            else if (46 == evt.keyCode) { // delete
+                this.value = '';
+            }
+        });
+        // 删除值
+        div.querySelector('input.del').addEventListener('keydown', function (evt) {
+            //console.log(evt);
+            // enter
+            if (evt.keyCode == 13) {
+                var value = this.value;
+                var isGoto = false;
+                var hasKey = uSelf.get(value);
+                if (hasKey) {
+                    var key = value;
+                    if (_src_data_operation__WEBPACK_IMPORTED_MODULE_1__["default"].inArray(key.substr(0, 1), ['~']) > -1) {
+                        key = key.substr(1);
+                        isGoto = true;
+                    }
+                    uSelf.del(key);
+                    uSelf.updateByData({}, !isGoto);
+                    div.querySelector('div.del').innerHTML = uSelf.newUrl;
+                }
+                else {
+                    div.querySelector('div.del').innerHTML = '输入值格式有误， 数据有误。首字母 ~ 表示跳转.';
+                }
+            }
+            else if (46 == evt.keyCode) { // delete
+                this.value = '';
+            }
+        });
+        main.appendChild(div);
+    };
+    return App;
+}());
+new App();
 
 
 /***/ })
 
 /******/ });
-});
-//# sourceMappingURL=Ja.umd.js.map
+//# sourceMappingURL=tsurl.js.map

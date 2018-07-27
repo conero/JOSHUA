@@ -2,6 +2,7 @@
  * 2018年7月26日 星期四
  * 类型运算
  */
+///<reference path="../index.d.ts"/>
 import map = Sr.map;
 
 export default {
@@ -20,5 +21,21 @@ export default {
             }
         });
         return newMap
+    },
+    /**
+     * 数组是否存在
+     * @param value
+     * @param {array} queue
+     * @returns {number}
+     */
+    inArray(value: any, queue: any[]): number{
+        let index:number = -1;
+        for(let i=0; i<queue.length; i++){
+            if(value == queue[i]){
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 }

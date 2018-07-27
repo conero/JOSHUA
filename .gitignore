@@ -6,5 +6,7 @@ node_modules/
 
 # 本地忽律文件，运维项目
 .ig.*
+tests/base/*.js.map
+
 # npm 安装缓存
 package-lock.json

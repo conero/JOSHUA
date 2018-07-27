@@ -38,7 +38,8 @@ let webpackFiles = [
     }))
         .js({
             Ja: 'Joshua',
-            store: 'browser/storage/store'
+            store: 'browser/storage/store',
+            url: 'browser/url',
         })
         .data
     

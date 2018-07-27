@@ -9,10 +9,10 @@ export default {
      * @param {*} obj 
      */
     noEmptyObj(obj: any): boolean{
-        let noEmp = false  
+        let noEmp = false;
         if(this.isObject(obj)){
-            for(var k in obj){
-                noEmp = true
+            for(let k in obj){
+                noEmp = true;
                 break
             }
         }      
