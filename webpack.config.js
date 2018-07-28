@@ -77,7 +77,7 @@ let webpackFiles = [
         author?: string
         name?: string
     }
-    export const LibVersion: VersionStruct = ${JSON.stringify(_json)}
+    export const LibVersion: VersionStruct = ${JSON.stringify(_json)};
     `
     fs.writeFileSync('./version.ts', versionSrpt)
 })()

@@ -5,6 +5,7 @@
 import {LibVersion} from '../version'
 import store from './browser/storage/store'
 import url from  './browser/url'
+import time from './time'
 
 export class Ja{
     static version: string = LibVersion.version;
@@ -13,3 +14,4 @@ export class Ja{
 
 export {store}
 export {url}
+export {time}

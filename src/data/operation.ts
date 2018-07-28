@@ -37,5 +37,17 @@ export default {
             }
         }
         return index;
+    },
+    /**
+     * 正在字符串转替换，弥补 string.replace 字符串查询
+     * @param {string} s
+     * @param {string} r
+     * @param {string} str
+     * @returns {string}
+     */
+    strReplace(s:string, r:string, str: string): string{
+        let reg = new RegExp(s, 'a');
+        str.replace(reg, r);
+        return str;
     }
 }

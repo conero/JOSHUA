@@ -1,7 +1,7 @@
 {
   "name": "joshua",
-  "release": "20180727",
-  "version": "1.0.1",
+  "release": "20180728",
+  "version": "1.0.2",
   "description": "js lib by self",
   "main": "index.js",
   "scripts": {

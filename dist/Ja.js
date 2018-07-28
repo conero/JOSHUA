@@ -90,7 +90,7 @@
 /*!***********************!*\
   !*** ./src/Joshua.ts ***!
   \***********************/
-/*! exports provided: Ja, store, url */
+/*! exports provided: Ja, store, url, time */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -103,10 +103,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _browser_url__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./browser/url */ "./src/browser/url.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "url", function() { return _browser_url__WEBPACK_IMPORTED_MODULE_2__["default"]; });
 
+/* harmony import */ var _time__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./time */ "./src/time.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "time", function() { return _time__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
 /**
  * 2018年7月26日 星期四
  * Joshua 总类型
  */
+
 
 
 
@@ -117,6 +121,7 @@ var Ja = /** @class */ (function () {
     Ja.author = _version__WEBPACK_IMPORTED_MODULE_0__["LibVersion"].author;
     return Ja;
 }());
+
 
 
 
@@ -608,6 +613,18 @@ __webpack_require__.r(__webpack_exports__);
             }
         }
         return index;
+    },
+    /**
+     * 正在字符串转替换，弥补 string.replace 字符串查询
+     * @param {string} s
+     * @param {string} r
+     * @param {string} str
+     * @returns {string}
+     */
+    strReplace: function (s, r, str) {
+        var reg = new RegExp(s, 'a');
+        str.replace(reg, r);
+        return str;
     }
 });
 
@@ -667,6 +684,122 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/time.ts":
+/*!*********************!*\
+  !*** ./src/time.ts ***!
+  \*********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _data_operation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./data/operation */ "./src/data/operation.ts");
+/**
+ * 2018年7月28日 星期六
+ * Joshua Conero
+ * 时间处理包
+ **/
+
+var Time = /** @class */ (function () {
+    function Time() {
+    }
+    /**
+     * 数据解析，格式语法同PHP: 2018-07-28 22:19:30
+     * @param {string} format
+     * @returns {string}
+     */
+    Time.date = function (format) {
+        format = format || 'y-m-d h:i:s';
+        var value = format;
+        var dt = new Date(), year = dt.getFullYear(), month = dt.getMonth() + 1, date = dt.getDate(), hour = dt.getHours(), min = dt.getMinutes(), sec = dt.getSeconds();
+        var quque = [
+            'Y', 'y', 'm', 'n', 'd', 'j',
+            'H', 'G', 'h', 'g', 'i', 's',
+            'w'
+        ];
+        quque.forEach((function (v) {
+            if (!v) {
+                return;
+            }
+            if (value.indexOf(v) > -1) {
+                var r = '';
+                switch (v) {
+                    case 'Y':
+                        r = year + '';
+                        break; // 2018
+                    case 'y': // 18
+                        r = year + '';
+                        r = r.substr(2);
+                        break;
+                    case 'm':
+                        r = (month < 10 ? '0' : '') + month;
+                        break; // 07
+                    case 'n':
+                        r = month + '';
+                        break; // 7
+                    case 'd':
+                        r = (date < 10 ? '0' : '') + date;
+                        break; // 03 日
+                    case 'j':
+                        r = date + '';
+                        break; // 3 日
+                    case 'H':
+                        r = (hour < 10 ? '0' : '') + hour;
+                        break; // 02 点
+                    case 'G':
+                        r = hour + '';
+                        break; // 2 点
+                    case 'h':
+                        var h12 = (hour > 12 ? hour - 12 : hour);
+                        r = (h12 < 10 ? '0' : '') + h12;
+                        break;
+                    case 'g':
+                        r = (hour > 12 ? hour - 12 : hour) + '';
+                        break;
+                    case 'i':
+                        r = (min < 10 ? '0' : '') + min + '';
+                        break;
+                    case 's':
+                        r = (sec < 10 ? '0' : '') + sec + '';
+                        break;
+                    case 'w':
+                        r = dt.getDay() + '';
+                        break;
+                }
+                if (r) {
+                    value = _data_operation__WEBPACK_IMPORTED_MODULE_0__["default"].strReplace(v, r, value);
+                }
+            }
+        }));
+        return value;
+    };
+    /**
+     *  2017-07-28 23:07:33 => 2017年07月28日
+     * @param {string} timeStr 日志字符串
+     * @param {*} def
+     * @return {string|null}
+     */
+    Time.time2ZhFmt = function (timeStr, def) {
+        var reg = /^[\d]{4}-[\d]{2}-[\d]{2}/;
+        def = def || '';
+        var fmt = def;
+        if (timeStr) {
+            var matchArr = timeStr.match(reg);
+            fmt = ('object' == typeof matchArr && matchArr.length > 0) ? matchArr[0] : def;
+            if (fmt) {
+                var queue = fmt.split('-');
+                fmt = queue[0] + "\u5E74" + queue[1] + "\u6708" + queue[2] + "\u65E5";
+            }
+        }
+        return fmt;
+    };
+    return Time;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (Time);
+
+
+/***/ }),
+
 /***/ "./version.ts":
 /*!********************!*\
   !*** ./version.ts ***!
@@ -677,7 +810,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LibVersion", function() { return LibVersion; });
-var LibVersion = { "version": "1.0.1", "release": "20180727", "author": "Joshua Conero", "name": "joshua" };
+var LibVersion = { "version": "1.0.2", "release": "20180728", "author": "Joshua Conero", "name": "joshua" };
 
 
 /***/ })
